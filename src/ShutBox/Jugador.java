@@ -53,4 +53,17 @@ public class Jugador {
 
 		return exists;
 	}
+	
+	public boolean checkNumbers (int number1, int number2) {
+		boolean checkedNumbers = false;
+		
+		boolean checkNumber1 = checkTile(number1);
+		boolean checkNumber2 = checkTile(number2);
+		
+		if (checkNumber1 && checkNumber2) {
+			checkedNumbers = true;
+		}
+		
+		return checkedNumbers;
+	}
 }
