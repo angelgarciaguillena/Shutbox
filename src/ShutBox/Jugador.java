@@ -27,6 +27,14 @@ public class Jugador {
 		return this.tablero.contains(dice1 + dice2);
 	}
 	
+	public boolean deleteTiles(int num) {
+		boolean valido = false;
+		if(tablero.contains(num)) {
+			tablero.remove(num - 1);
+			valido = true;
+		}
+		return valido;
+	}
 	
 	
 	
