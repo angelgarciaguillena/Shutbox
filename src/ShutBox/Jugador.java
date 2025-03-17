@@ -23,6 +23,10 @@ public class Jugador {
 		return rand.nextInt(1, 7);
 	}
 	
+	public boolean compareNumbers(int dice1, int dice2) {
+		return this.tablero.contains(dice1 + dice2);
+	}
+	
 	
 	
 	
