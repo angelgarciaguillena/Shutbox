@@ -2,14 +2,11 @@ package ShutBox;
 
 import java.util.*;
 
-public class Jugador {
+public class Player {
 
-	private int dice1;
-	private int dice2;
-	private int diceAddition;
 	private int points;
 
-	private List<Integer> tablero = new ArrayList<>();
+	private List<Integer> table = new ArrayList<>();
 
 	public void fillTable(List<Integer> tablero) {
 		for (int i = 0; i < 12; i++) {
@@ -24,13 +21,13 @@ public class Jugador {
 	}
 
 	public boolean compareNumbers(int dice1, int dice2) {
-		return this.tablero.contains(dice1 + dice2);
+		return this.table.contains(dice1 + dice2);
 	}
 
 	public boolean deleteTiles(int num) {
 		boolean valido = false;
-		if (tablero.contains(num)) {
-			tablero.remove(num - 1);
+		if (table.contains(num)) {
+			table.remove(num - 1);
 			valido = true;
 		}
 		return valido;
@@ -45,7 +42,7 @@ public class Jugador {
 	public boolean checkTile(int numberTile) {
 		boolean exists = false;
 
-		for (int n : tablero) {
+		for (int n : table) {
 			if (n == numberTile) {
 				exists = true;
 			}
