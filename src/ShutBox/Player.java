@@ -5,6 +5,8 @@ import java.util.*;
 public class Player {
 
 	private int points;
+	
+	private List<Integer> table = new ArrayList<>();
 
 	Player(int points) {
 		if (points >= 0) {
@@ -20,7 +22,6 @@ public class Player {
 		this.points = points;
 	}
 
-	private List<Integer> table = new ArrayList<>();
 
 	public void fillTable(List<Integer> tablero) {
 		for (int i = 0; i < 12; i++) {
