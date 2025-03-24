@@ -77,18 +77,6 @@ public class Player {
 
 		return checkedNumbers;
 	}
-	
-	public int countPoint() {
-		
-		int cont = 0;
-		
-		for (n : table) {
-			if (n != 'X') {
-				cont ++;
-			}
-		}
-		return cont;
-	}
 
 	@Override
 	public String toString() {
