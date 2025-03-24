@@ -6,6 +6,20 @@ public class Player {
 
 	private int points;
 
+	Player(int points) {
+		if (points >= 0) {
+			this.points = points;
+		}
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
 	private List<Integer> table = new ArrayList<>();
 
 	public void fillTable(List<Integer> tablero) {
@@ -50,17 +64,23 @@ public class Player {
 
 		return exists;
 	}
-	
-	public boolean checkNumbers (int number1, int number2) {
+
+	public boolean checkNumbers(int number1, int number2) {
 		boolean checkedNumbers = false;
-		
+
 		boolean checkNumber1 = checkTile(number1);
 		boolean checkNumber2 = checkTile(number2);
-		
+
 		if (checkNumber1 && checkNumber2) {
 			checkedNumbers = true;
 		}
-		
+
 		return checkedNumbers;
 	}
+
+	@Override
+	public String toString() {
+		return "Player points: " + points + "\nBoard: " + table;
+	}
+
 }
