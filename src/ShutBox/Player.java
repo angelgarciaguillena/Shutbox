@@ -4,14 +4,12 @@ import java.util.*;
 
 public class Player {
 
-	private int points;
-	
+	private int points = 0;
+	private int addition = 0;
+
 	private List<Integer> table = new ArrayList<>();
 
-	Player(int points) {
-		if (points >= 0) {
-			this.points = points;
-		}
+	Player() {
 	}
 
 	public int getPoints() {
@@ -22,6 +20,9 @@ public class Player {
 		this.points = points;
 	}
 
+	public int getAddition() {
+		return addition;
+	}
 
 	public void fillTable(List<Integer> tablero) {
 		for (int i = 0; i < 12; i++) {
@@ -29,10 +30,10 @@ public class Player {
 		}
 	}
 
-	public int throwDice() {
+	public void throwDice() {
 		Random rand = new Random();
 
-		return rand.nextInt(1, 7);
+		addition = rand.nextInt(1, 7) + rand.nextInt(1, 7);
 	}
 
 	public boolean compareNumbers(int dice1, int dice2) {
@@ -66,13 +67,12 @@ public class Player {
 		return exists;
 	}
 
-	public boolean checkNumbers(int number1, int number2) {
+	public boolean checkNumbers(int number1) {
 		boolean checkedNumbers = false;
 
 		boolean checkNumber1 = checkTile(number1);
-		boolean checkNumber2 = checkTile(number2);
 
-		if (checkNumber1 && checkNumber2) {
+		if (checkNumber1) {
 			checkedNumbers = true;
 		}
 
@@ -81,7 +81,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player points: " + points + "\nBoard: " + table;
+		return "Player points: " + points + "\nAddition: " + addition;
 	}
 
 }
