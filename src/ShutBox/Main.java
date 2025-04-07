@@ -27,34 +27,43 @@ public class Main {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		System.out.println("¡Bienvenidos a SHUTBOX!");
-		System.out.println("Jugador 1 comienza.");
+		int contador = 1;
+		boolean salirBucle = false;
+
+		System.out.println("¡Welcome to SHUTBOX!");
+		System.out.println("Player " + contador + " starts.");
 
 		// Ronda del Jugador 1
-		while (true) {
+		while (!salirBucle) {
 			int diceSum = player1.getAddition();
-			System.out.println("Jugador 1 tiró los dados: " + diceSum);
-			player1.toString();
+			System.out.println("Player " + contador + " threw the dices: " + diceSum);
 
-			System.out.print("Introduce uno o dos números que sumen " + diceSum + ": ");
+			// it shows the player that is currently playing
+			if (contador == 1) {
+				player1.toString();
+			} else {
+				player2.toString();
+			}
+
+			System.out.print("Introduce one or more numbers that sums " + diceSum + ": ");
 			String input = sc.nextLine();
 			String[] parts = input.trim().split(" ");
 
+			// if its only one number
 			if (parts.length == 1) {
 				int num = Integer.parseInt(parts[0]);
 				if (num == diceSum && player1.checkTile(num)) {
 					player1.deleteTiles(num);
 				} else {
 					System.out.println("Jugada no válida. Turno finalizado.");
-					break;
+					salirBucle = true;
 				}
-			} else if (parts.length == 2) {
-				int num1 = Integer.parseInt(parts[0]);
-				int num2 = Integer.parseInt(parts[1]);
-				if ((num1 + num2 == diceSum) && player1.checkTile(num1) && player1.checkTile(num2)) {
+			} else if (parts.length > 1) {
+				
+				if (Player.checkAddition(parts, diceSum)) {
 
-					player1.deleteTiles(num1);
-					player1.deleteTiles(num2);
+					//player1.deleteTiles(num1);
+					//player1.deleteTiles(num2);
 					System.out.println("Jugada válida");
 
 				} else {

@@ -122,7 +122,7 @@ public class Player {
 	 * @return Devuelve si la suma de los números que quiere tirar el usuario es
 	 *         igual a la suma de los dos dados
 	 */
-	public boolean checkAddition(String[] array, int diceAddition) {
+	public static boolean checkAddition(String[] array, int diceAddition) {
 
 		int[] intArray = new int[array.length];
 		int suma = 0;
