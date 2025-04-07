@@ -79,52 +79,64 @@ public class Player {
 		return checkedNumbers;
 	}
 
+	public int countPoint() {
+		int cont = 0;
+
+		for (int n : table) {
+			cont += n;
+		}
+
+		return cont;
+	}
+
 	@Override
 	public String toString() {
 		return "Player points: " + points + "\nAddition: " + addition;
 	}
-	
+
 	public boolean canThrow(String numbers, int diceAddition) {
 		boolean res = true;
 		int numero;
-		
+
 		String[] numbersArray;
-		
+
 		numbersArray = numbers.split(" ");
-		
+
 		if (checkAddition(numbersArray, diceAddition))
-		for (String num : numbersArray) {
-			numero = Integer.parseInt(num);
-			
-			if (table.indexOf(numero) < 0) {
-				res = false;
+			for (String num : numbersArray) {
+				numero = Integer.parseInt(num);
+
+				if (table.indexOf(numero) < 0) {
+					res = false;
+				}
 			}
-		}
-		
+
 		return res;
 	}
-	
+
 	/**
 	 * 
-	 * @param array Array de cadenas (incluye los números que el usuario quiere tirar, por ej "1 2 4")
+	 * @param array        Array de cadenas (incluye los números que el usuario
+	 *                     quiere tirar, por ej "1 2 4")
 	 * @param diceAddition La suma de los dos dados
-	 * @return Devuelve si la suma de los números que quiere tirar el usuario es igual a la suma de los dos dados
+	 * @return Devuelve si la suma de los números que quiere tirar el usuario es
+	 *         igual a la suma de los dos dados
 	 */
 	public boolean checkAddition(String[] array, int diceAddition) {
-		
+
 		int[] intArray = new int[array.length];
 		int suma = 0;
 
-        for (int i = 0; i < array.length; i++) {
-            intArray[i] = Integer.parseInt(array[i]);
-        }
-        
-        for (int i = 0; i < intArray.length; i++) {
-        	suma += intArray[i];
-        }
-        
-        return suma == diceAddition;
-        
+		for (int i = 0; i < array.length; i++) {
+			intArray[i] = Integer.parseInt(array[i]);
+		}
+
+		for (int i = 0; i < intArray.length; i++) {
+			suma += intArray[i];
+		}
+
+		return suma == diceAddition;
+
 	}
 
 }
