@@ -143,6 +143,13 @@ public class Player {
 
 	}
 
+	/**
+	 * Method to check who wins
+	 * 
+	 * @param player1Score The points of the player 1
+	 * @param player2Score The points of the player 2
+	 * @return A string announcing who wins
+	 */
 	public static String winner(int player1Score, int player2Score) {
 		String whoWins = "";
 		// if the score of the player 2 is bigger than the score of the player 1
