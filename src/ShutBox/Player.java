@@ -2,44 +2,89 @@ package ShutBox;
 
 import java.util.*;
 
+/**
+ * Class that represents a player with all the attributes necessaries to be a
+ * player
+ */
 public class Player {
 
+	/**
+	 * Attribute that represents the points of the player
+	 */
 	private int points = 0;
+	/**
+	 * Attribute that represents the addition of two dices
+	 */
 	private int addition = 0;
 
+	/**
+	 * A list that stores the board of the player
+	 */
 	private List<Integer> table = new ArrayList<>();
 
-	Player() {
-	}
-
+	/**
+	 * Get method to obtain the number of points that the player has
+	 * 
+	 * @return a number that represents the number of points
+	 */
 	public int getPoints() {
 		return points;
 	}
 
+	/**
+	 * Set method to update the points of the player
+	 * 
+	 * @param points New points that the player will have
+	 */
 	public void setPoints(int points) {
 		this.points = points;
 	}
 
+	/**
+	 * Get method to obtain the addition of the dices
+	 * 
+	 * @return a number that represents the addition of the dices
+	 */
 	public int getAddition() {
 		return addition;
 	}
 
+	/**
+	 * Get method that obtains the board of the player
+	 * 
+	 * @return the list of the board
+	 */
 	public List<Integer> getTable() {
 		return table;
 	}
 
-	public void fillTable(List<Integer> tablero) {
+	/**
+	 * Method that will be used to fill the board with all the tiles
+	 * 
+	 * @param board the list to fill
+	 */
+	public void fillTable(List<Integer> board) {
 		for (int i = 0; i < 12; i++) {
-			tablero.add(i + 1);
+			board.add(i + 1);
 		}
 	}
 
+	/**
+	 * Method that will be used to throw two dices and assign the addition of these
+	 * two to the atribute
+	 */
 	public void throwDice() {
 		Random rand = new Random();
 
 		addition = rand.nextInt(1, 7) + rand.nextInt(1, 7);
 	}
-
+	
+	/**
+	 * 
+	 * @param dice1
+	 * @param dice2
+	 * @return
+	 */
 	public boolean compareNumbers(int dice1, int dice2) {
 		return this.table.contains(dice1 + dice2);
 	}
