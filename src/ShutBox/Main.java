@@ -50,19 +50,31 @@ public class Main {
 			// it stores the numbers that are in the variable input into the array
 			parts = input.split("\\s+");
 
-			// check the addition and if the tiles are still up
+			// firstly it checks if the user introduced something
 			if (parts.length == 0 || (parts.length == 1 && parts[0].isEmpty())) {
+				// if its true then the validation of the move is false
 				valid = false;
 			}
+			// for each to travel through the array of the numbers that will be deleted
 			for (String part : parts) {
+				// if the move was valid (true)
 				if (valid) {
+					// it checks if the number is between 0 and 9
 					if (!part.matches("\\d+")) {
+						// if it isnt then the move isnt valid (false)
 						valid = false;
+						// if the number IS between 0 and 9
 					} else {
+						// it turns the String into a number and stores it into the variable num
 						int num = Integer.parseInt(part);
+
+						// if the number doesnt exists in the board
 						if (!player1.checkTile(num)) {
+							// then the move is not valid (false)
 							valid = false;
+							// if the number exists
 						} else {
+
 							total += num;
 							toRemove.add(num);
 						}
@@ -120,7 +132,9 @@ public class Main {
 						if (!player2.checkTile(num)) {
 							valid = false;
 						} else {
+							// it adds the current number to the variable
 							total += num;
+							// it adds the number the number to the list to remove
 							toRemove.add(num);
 						}
 					}
@@ -128,6 +142,8 @@ public class Main {
 			}
 
 			// Ejecutar movimiento o terminar turno
+			// if the movement is valid and if the total of the numbers introduced are the
+			// same as the addition of the numbers
 			if (valid && total == sum) {
 				for (int num : toRemove) {
 					player2.getTable().remove(Integer.valueOf(num));
