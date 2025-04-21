@@ -143,4 +143,23 @@ public class Player {
 
 	}
 
+	public static String winner(int player1Score, int player2Score) {
+		String whoWins = "";
+		// if the score of the player 2 is bigger than the score of the player 1
+		if (player1Score < player2Score) {
+			// the player 1 wins
+			whoWins = "Player 1 wins!";
+			// if its the other way around
+		} else if (player2Score < player1Score) {
+			// the player 2 wins
+			whoWins = "Player 2 wins!";
+			// if they have the same score its a tie
+		} else {
+			whoWins = "Tie!";
+		}
+
+		// return the variable
+		return whoWins;
+	}
+
 }

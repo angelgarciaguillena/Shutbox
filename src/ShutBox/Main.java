@@ -26,6 +26,10 @@ public class Main {
 		// list that stores the numbers to remove from the board
 		List<Integer> toRemove;
 		boolean canMove = true; // quitar
+		// the score of the player 1
+		int score1;
+		// the score of the player 2
+		int score2;
 
 		// turn of the player 1
 		System.out.println("\n--- Turn of player 1 ---");
@@ -141,39 +145,47 @@ public class Main {
 				}
 			}
 
-			// Ejecutar movimiento o terminar turno
 			// if the movement is valid and if the total of the numbers introduced are the
 			// same as the addition of the numbers
 			if (valid && total == sum) {
+				// we travel the array of the numbers to remove
 				for (int num : toRemove) {
+					// for each number we do a get of the board and we remove the index of the
+					// number to remove
 					player2.getTable().remove(Integer.valueOf(num));
 				}
-				System.out.println("Fichas removidas: " + toRemove);
+
+				System.out.println("Deleted tiles: " + toRemove);
+				// if the player has all their tiles down
 				if (player2.getTable().isEmpty()) {
-					System.out.println("Player 2 ha eliminado todas las fichas.");
+					System.out.println("Player 2 has played all their tiles");
+					// and therefore the move cant be made
 					canMove = false;
 				}
+				// if the total of numbers isnt the same as the addition of the dices or if the
+				// movement wasnt valid (false)
 			} else {
-				System.out.println("Ya no puedes mover. Fin turno Player 2.");
+				System.out.println("You can't make any more moves. End of the Player 2's turn.");
+				// and the move is not valid
 				canMove = false;
 			}
 		}
 
-		// Fin del juego: cálculo de puntuaciones
-		int score1 = player1.countPoint();
-		int score2 = player2.countPoint();
-		System.out.println("\n--- Fin del juego ---");
-		System.out.println("Puntuación Player 1: " + score1);
-		System.out.println("Puntuación Player 2: " + score2);
+		// END OF THE GAME.
+		// in the variable that stores the points of the player 1 we use the method
+		// countPoints to count the points of the player
+		score1 = player1.countPoint();
+		// same with player 2
+		score2 = player2.countPoint();
+		// we announce their scores
+		System.out.println("\n--- End of the game ---");
+		System.out.println("Player 1 points: " + score1);
+		System.out.println("Player 2 points: " + score2);
 
-		if (score1 < score2) {
-			System.out.println("¡Player 1 gana!");
-		} else if (score2 < score1) {
-			System.out.println("¡Player 2 gana!");
-		} else {
-			System.out.println("¡Empate!");
-		}
+		// we decide the winner
+		Player.winner(score1, score2);
 
+		// and we close the scanner
 		scanner.close();
 	}
 }
