@@ -1,137 +1,152 @@
 package ShutBox;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+    public static void main(String[] args) {
+        // Inicializar jugadores y sus tablas
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.fillTable(player1.getTable());
+        player2.fillTable(player2.getTable());
 
-	public static void main(String[] args) {
-		/*
-		 * Scanner sc = new Scanner(System.in);
-		 * 
-		 * Player pl;
-		 * 
-		 * int num; int cont = 1; boolean turn = false; boolean winLose = false;
-		 * 
-		 * do { System.out.println("Turn of player " + cont);
-		 * 
-		 * while (!turn) { //p1 = new }
-		 * 
-		 * } while (!winLose);
-		 * 
-		 * sc.close(); }
-		 * 
-		 * }
-		 */
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        String[] parts;
+        int sum;
+        int total;
+        boolean valid;
+        List<Integer> toRemove;
 
-		Scanner sc = new Scanner(System.in);
-		Player player1 = new Player();
-		Player player2 = new Player();
+        // Turno del Player 1
+        System.out.println("\n--- Turno de Player 1 ---");
+        boolean canMove = true;
+        while (canMove && !player1.getTable().isEmpty()) {
+            System.out.println("Fichas: " + player1.getTable());
 
-		int contador = 1;
-		boolean salirBucle = false;
+            // Tirar dados y mostrar suma
+            player1.throwDice();
+            sum = player1.getAddition();
+            System.out.println("Suma de los dados: " + sum);
 
-		System.out.println("¡Welcome to SHUTBOX!");
-		System.out.println("Player " + contador + " starts.");
+            // Inicializar variables del intento
+            total = 0;
+            valid = true;
+            toRemove = new ArrayList<>();
 
-		// Ronda del Jugador 1
-		while (!salirBucle) {
-			int diceSum = player1.getAddition();
-			System.out.println("Player " + contador + " threw the dices: " + diceSum);
+            // Leer entrada del usuario
+            System.out.print("Introduce las fichas a remover (deben sumar " + sum + "): ");
+            input = scanner.nextLine().trim();
+            parts = input.split("\\s+");
 
-			// it shows the player that is currently playing
-			if (contador == 1) {
-				player1.toString();
-			} else {
-				player2.toString();
-			}
+            // Validar la suma y disponibilidad de fichas
+            if (parts.length == 0 || (parts.length == 1 && parts[0].isEmpty())) {
+                valid = false;
+            }
+            for (String part : parts) {
+                if (valid) {
+                    if (!part.matches("\\d+")) {
+                        valid = false;
+                    } else {
+                        int num = Integer.parseInt(part);
+                        if (!player1.checkTile(num)) {
+                            valid = false;
+                        } else {
+                            total += num;
+                            toRemove.add(num);
+                        }
+                    }
+                }
+            }
 
-			System.out.print("Introduce one or more numbers that sums " + diceSum + ": ");
-			String input = sc.nextLine();
-			String[] parts = input.trim().split(" ");
+            // Ejecutar movimiento o terminar turno
+            if (valid && total == sum) {
+                for (int num : toRemove) {
+                    player1.getTable().remove(Integer.valueOf(num));
+                }
+                System.out.println("Fichas removidas: " + toRemove);
+                if (player1.getTable().isEmpty()) {
+                    System.out.println("Player 1 ha eliminado todas las fichas.");
+                    canMove = false;
+                }
+            } else {
+                System.out.println("Ya no puedes mover. Fin turno Player 1.");
+                canMove = false;
+            }
+        }
 
-			// if its only one number
-			if (parts.length == 1) {
-				int num = Integer.parseInt(parts[0]);
-				if (num == diceSum && player1.checkTile(num)) {
-					player1.deleteTiles(num);
-				} else {
-					System.out.println("Jugada no válida. Turno finalizado.");
-					salirBucle = true;
-				}
-			} else if (parts.length > 1) {
-				
-				if (Player.checkAddition(parts, diceSum)) {
+        // Turno del Player 2
+        System.out.println("\n--- Turno de Player 2 ---");
+        canMove = true;
+        while (canMove && !player2.getTable().isEmpty()) {
+            System.out.println("Fichas: " + player2.getTable());
 
-					//player1.deleteTiles(num1);
-					//player1.deleteTiles(num2);
-					System.out.println("Jugada válida");
+            // Tirar dados y mostrar suma
+            player2.throwDice();
+            sum = player2.getAddition();
+            System.out.println("Suma de los dados: " + sum);
 
-				} else {
-					System.out.println("Jugada no válida. Turno finalizado.");
-					break;
-				}
-			} else {
-				System.out.println("Entrada no válida. Turno finalizado.");
-				break;
-			}
-		}
+            // Inicializar variables del intento
+            total = 0;
+            valid = true;
+            toRemove = new ArrayList<>();
 
-		System.out.println("\nJugador 2 comienza.");
+            // Leer entrada del usuario
+            System.out.print("Introduce las fichas a remover (deben sumar " + sum + "): ");
+            input = scanner.nextLine().trim();
+            parts = input.split("\\s+");
 
-		// Ronda del Jugador 2
-		while (true) {
-			int diceSum = player2.getAddition();
-			System.out.println("Jugador 2 tiró los dados: " + diceSum);
-			player2.toString();
+            // Validar la suma y disponibilidad de fichas
+            if (parts.length == 0 || (parts.length == 1 && parts[0].isEmpty())) {
+                valid = false;
+            }
+            for (String part : parts) {
+                if (valid) {
+                    if (!part.matches("\\d+")) {
+                        valid = false;
+                    } else {
+                        int num = Integer.parseInt(part);
+                        if (!player2.checkTile(num)) {
+                            valid = false;
+                        } else {
+                            total += num;
+                            toRemove.add(num);
+                        }
+                    }
+                }
+            }
 
-			System.out.print("Introduce uno o dos números que sumen " + diceSum + ": ");
-			String input = sc.nextLine();
-			String[] parts = input.trim().split(" ");
+            // Ejecutar movimiento o terminar turno
+            if (valid && total == sum) {
+                for (int num : toRemove) {
+                    player2.getTable().remove(Integer.valueOf(num));
+                }
+                System.out.println("Fichas removidas: " + toRemove);
+                if (player2.getTable().isEmpty()) {
+                    System.out.println("Player 2 ha eliminado todas las fichas.");
+                    canMove = false;
+                }
+            } else {
+                System.out.println("Ya no puedes mover. Fin turno Player 2.");
+                canMove = false;
+            }
+        }
 
-			if (parts.length == 1) {
-				int num = Integer.parseInt(parts[0]);
-				if (num == diceSum && player2.checkTile(num)) {
-					player2.deleteTiles(num);
-				} else {
-					System.out.println("Jugada no válida. Turno finalizado.");
-					break;
-				}
-			} else if (parts.length == 2) {
-				int num1 = Integer.parseInt(parts[0]);
-				int num2 = Integer.parseInt(parts[1]);
-				if ((num1 + num2 == diceSum) && player2.checkTile(num1) && player2.checkTile(num2)) {
+        // Fin del juego: cálculo de puntuaciones
+        int score1 = player1.countPoint();
+        int score2 = player2.countPoint();
+        System.out.println("\n--- Fin del juego ---");
+        System.out.println("Puntuación Player 1: " + score1);
+        System.out.println("Puntuación Player 2: " + score2);
 
-					player2.deleteTiles(num1);
-					player2.deleteTiles(num2);
+        if (score1 < score2) {
+            System.out.println("¡Player 1 gana!");
+        } else if (score2 < score1) {
+            System.out.println("¡Player 2 gana!");
+        } else {
+            System.out.println("¡Empate!");
+        }
 
-					System.out.println("Jugada válida");
-
-				} else {
-					System.out.println("Jugada no válida. Turno finalizado.");
-					break;
-				}
-			} else {
-				System.out.println("Entrada no válida. Turno finalizado.");
-				break;
-			}
-		}
-
-		// Resultado final
-		int points1 = player1.countPoint();
-		int points2 = player2.countPoint();
-
-		System.out.println("\nPuntuación final:");
-		System.out.println("Jugador 1: " + points1);
-		System.out.println("Jugador 2: " + points2);
-
-		if (points1 < points2) {
-			System.out.println("¡Jugador 1 gana!");
-		} else if (points2 < points1) {
-			System.out.println("¡Jugador 2 gana!");
-		} else {
-			System.out.println("¡Empate!");
-		}
-
-		sc.close();
-	}
+        scanner.close();
+    }
 }

@@ -24,6 +24,10 @@ public class Player {
 		return addition;
 	}
 
+	public List<Integer> getTable() {
+		return table;
+	}
+
 	public void fillTable(List<Integer> tablero) {
 		for (int i = 0; i < 12; i++) {
 			tablero.add(i + 1);
