@@ -183,7 +183,7 @@ public class Main {
 		System.out.println("Player 2 points: " + score2);
 
 		// we decide the winner
-		Player.winner(score1, score2);
+		System.out.println(Player.winner(score1, score2));
 
 		// and we close the scanner
 		scanner.close();
