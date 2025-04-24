@@ -78,7 +78,7 @@ public class Player {
 
 		addition = rand.nextInt(1, 7) + rand.nextInt(1, 7);
 	}
-	
+
 	/**
 	 * 
 	 * @param dice1
@@ -89,6 +89,12 @@ public class Player {
 		return this.table.contains(dice1 + dice2);
 	}
 
+	/**
+	 * Method to delete the tiles from the board
+	 * 
+	 * @param num The number of the tile that will be removed
+	 * @return true or false
+	 */
 	public boolean deleteTiles(int num) {
 		boolean valido = false;
 		if (table.contains(num)) {
@@ -116,18 +122,11 @@ public class Player {
 		return exists;
 	}
 
-	public boolean checkNumbers(int number1) {
-		boolean checkedNumbers = false;
-
-		boolean checkNumber1 = checkTile(number1);
-
-		if (checkNumber1) {
-			checkedNumbers = true;
-		}
-
-		return checkedNumbers;
-	}
-
+	/**
+	 * Method that will count the points of each player
+	 * 
+	 * @return A number representing the points of the player
+	 */
 	public int countPoint() {
 		int cont = 0;
 
@@ -143,6 +142,13 @@ public class Player {
 		return "Player points: " + points + "\nAddition: " + addition;
 	}
 
+	/**
+	 * Method that checks if the tile can be thrown
+	 * 
+	 * @param numbers      The numbers or number that we will check
+	 * @param diceAddition The addition of the dices
+	 * @return true or false depending on if the movement is valid or not
+	 */
 	public boolean canThrow(String numbers, int diceAddition) {
 		boolean res = true;
 		int numero;
@@ -165,11 +171,11 @@ public class Player {
 
 	/**
 	 * 
-	 * @param array        Array de cadenas (incluye los números que el usuario
-	 *                     quiere tirar, por ej "1 2 4")
-	 * @param diceAddition La suma de los dos dados
-	 * @return Devuelve si la suma de los números que quiere tirar el usuario es
-	 *         igual a la suma de los dos dados
+	 * @param array        String array (contains the number the user wants to
+	 *                     throw, for example: 1, 2, 3)
+	 * @param diceAddition The addition of the two dices
+	 * @return It returns true if the addition of the numbers is the same as the
+	 *         addition and false if its otherwise
 	 */
 	public static boolean checkAddition(String[] array, int diceAddition) {
 
