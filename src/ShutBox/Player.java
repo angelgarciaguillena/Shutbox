@@ -91,22 +91,6 @@ public class Player {
 	}
 
 	/**
-	 * Method that we will use to delete the tiles from the board
-	 * 
-	 * @param num The number of the tile we will remove
-	 * @return returns true or false depending on wether the operation was succesful
-	 *         or not
-	 */
-	public boolean deleteTiles(int num) {
-		boolean valido = false;
-		if (table.contains(num)) {
-			table.remove(num - 1);
-			valido = true;
-		}
-		return valido;
-	}
-
-	/**
 	 * Method to check if the tile is still in the board
 	 * 
 	 * @param numberTile
@@ -125,7 +109,7 @@ public class Player {
 	}
 
 	/**
-	 * Method that we will use to check if the numbers are still up
+	 * <<<<<<< HEAD Method that we will use to check if the numbers are still up
 	 * 
 	 * @param number1 The number to check
 	 * @return returns true or false depending on wether the operation was succesful
@@ -146,7 +130,11 @@ public class Player {
 	/**
 	 * Method that we will use to count the points of each player
 	 * 
-	 * @return a number that represents the points of the player
+	 * @return a number that represents the points of the player ======= Method that
+	 *         will count the points of each player
+	 * 
+	 * @return A number representing the points of the player >>>>>>>
+	 *         refs/remotes/origin/master
 	 */
 	public int countPoint() {
 		int cont = 0;
@@ -164,39 +152,12 @@ public class Player {
 	}
 
 	/**
-	 * Method to check if the player can throw the tile
 	 * 
-	 * @param numbers      The numbers of the tiles that we will throw
-	 * @param diceAddition The addition of the 2 dices
-	 * @return true or false depending on wether you can throw the dices or not
-	 */
-	public boolean canThrow(String numbers, int diceAddition) {
-		boolean res = true;
-		int numero;
-
-		String[] numbersArray;
-
-		numbersArray = numbers.split(" ");
-
-		if (checkAddition(numbersArray, diceAddition))
-			for (String num : numbersArray) {
-				numero = Integer.parseInt(num);
-
-				if (table.indexOf(numero) < 0) {
-					res = false;
-				}
-			}
-
-		return res;
-	}
-
-	/**
-	 * 
-	 * @param array        Array de cadenas (incluye los números que el usuario
-	 *                     quiere tirar, por ej "1 2 4")
-	 * @param diceAddition La suma de los dos dados
-	 * @return Devuelve si la suma de los números que quiere tirar el usuario es
-	 *         igual a la suma de los dos dados
+	 * @param array        String array (contains the number the user wants to
+	 *                     throw, for example: 1, 2, 3)
+	 * @param diceAddition The addition of the two dices
+	 * @return It returns true if the addition of the numbers is the same as the
+	 *         addition and false if its otherwise
 	 */
 	public static boolean checkAddition(String[] array, int diceAddition) {
 
