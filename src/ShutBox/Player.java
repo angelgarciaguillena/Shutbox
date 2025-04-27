@@ -80,31 +80,6 @@ public class Player {
 	}
 
 	/**
-	 * 
-	 * @param dice1
-	 * @param dice2
-	 * @return
-	 */
-	public boolean compareNumbers(int dice1, int dice2) {
-		return this.table.contains(dice1 + dice2);
-	}
-
-	/**
-	 * Method to delete the tiles from the board
-	 * 
-	 * @param num The number of the tile that will be removed
-	 * @return true or false
-	 */
-	public boolean deleteTiles(int num) {
-		boolean valido = false;
-		if (table.contains(num)) {
-			table.remove(num - 1);
-			valido = true;
-		}
-		return valido;
-	}
-
-	/**
 	 * Method to check if the tile is still in the board
 	 * 
 	 * @param numberTile
@@ -140,33 +115,6 @@ public class Player {
 	@Override
 	public String toString() {
 		return "Player points: " + points + "\nAddition: " + addition;
-	}
-
-	/**
-	 * Method that checks if the tile can be thrown
-	 * 
-	 * @param numbers      The numbers or number that we will check
-	 * @param diceAddition The addition of the dices
-	 * @return true or false depending on if the movement is valid or not
-	 */
-	public boolean canThrow(String numbers, int diceAddition) {
-		boolean res = true;
-		int numero;
-
-		String[] numbersArray;
-
-		numbersArray = numbers.split(" ");
-
-		if (checkAddition(numbersArray, diceAddition))
-			for (String num : numbersArray) {
-				numero = Integer.parseInt(num);
-
-				if (table.indexOf(numero) < 0) {
-					res = false;
-				}
-			}
-
-		return res;
 	}
 
 	/**
