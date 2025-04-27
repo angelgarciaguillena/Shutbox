@@ -162,9 +162,9 @@ public class Player {
 		for (int i = 0; i < array.length; i++) {
 			intArray[i] = Integer.parseInt(array[i]);
 		}
-
-		for (int i = 0; i < intArray.length; i++) {
-			suma += intArray[i];
+		
+		for (int num : intArray) {
+			suma += num;
 		}
 
 		return suma == diceAddition;
