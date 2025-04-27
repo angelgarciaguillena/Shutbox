@@ -80,17 +80,6 @@ public class Player {
 	}
 
 	/**
-	 * Method that we will use to compare the addition of the two numbers
-	 * 
-	 * @param dice1
-	 * @param dice2
-	 * @return
-	 */
-	public boolean compareNumbers(int dice1, int dice2) {
-		return this.table.contains(dice1 + dice2);
-	}
-
-	/**
 	 * Method to check if the tile is still in the board
 	 * 
 	 * @param numberTile
