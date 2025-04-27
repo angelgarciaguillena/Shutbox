@@ -146,11 +146,6 @@ public class Player {
 		return cont;
 	}
 
-	@Override
-	public String toString() {
-		return "Player points: " + points + "\nAddition: " + addition;
-	}
-
 	/**
 	 * 
 	 * @param array        String array (contains the number the user wants to
@@ -202,4 +197,8 @@ public class Player {
 		return whoWins;
 	}
 
+	@Override
+	public String toString() {
+		return "Player points: " + points + "\nAddition: " + addition;
+	}
 }

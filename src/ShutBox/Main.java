@@ -35,102 +35,94 @@ public class Main {
 
 	private static void playTurn(Player player, int playerNumber) {
 
-		try (
-				// Initialization of the scanner to introduce data
-				Scanner read = new Scanner(System.in)) {
+		// Initialization of the scanner to introduce data
+		Scanner read = new Scanner(System.in);
 
-			// variable to store if the movement can be made
-			boolean canMove = true;
-			// variable to store the numbers that the user introduces
-			String input;
-			// String array to store each number the user introduced
-			String[] parts;
-			// variable that stores the addition of the 2 dicess
-			int sum;
-			// the addition of the numbers the user introduced
-			int total;
-			// if the movement is valid or not
-			boolean valid;
-			// a list to store all the numbers to remove from the board
-			List<Integer> toRemove;
+		// variable to store if the movement can be made
+		boolean canMove = true;
+		// variable to store the numbers that the user introduces
+		String input;
+		// String array to store each number the user introduced
+		String[] parts;
+		// variable that stores the addition of the 2 dicess
+		int sum;
+		// if the movement is valid or not
+		boolean valid;
+		// a list to store all the numbers to remove from the board
+		List<Integer> toRemove;
 
-			System.out.println("\n--- Turn of player " + playerNumber + " ---");
+		System.out.println("\n--- Turn of player " + playerNumber + " ---");
 
-			do {
-				System.out.println("Tiles: " + player.getTable());
+		do {
+			System.out.println("Tiles: " + player.getTable());
 
-				// the player throws the dice
-				player.throwDice();
-				// the addition of the dices gets stored in the variable
-				sum = player.getAddition();
-				System.out.println("Addition of the dices: " + sum);
+			// the player throws the dice
+			player.throwDice();
+			// the addition of the dices gets stored in the variable
+			sum = player.getAddition();
+			System.out.println("Addition of the dices: " + sum);
 
-				// initialize the variables for the next move
-				total = 0;
-				valid = true;
-				toRemove = new ArrayList<>();
+			// initialize the variables for the next move
+			valid = true;
+			toRemove = new ArrayList<>();
 
-				// ask the user for the tiles to put down
-				System.out.print("Introduce the tiles to put down (the addition must be " + sum + "): ");
-				// store it in the variable
-				input = read.nextLine().trim();
-				// store it into the array
-				parts = input.split("\\s+");
+			// ask the user for the tiles to put down
+			System.out.print("Introduce the tiles to put down (the addition must be " + sum + "): ");
+			// store it in the variable
+			input = read.nextLine().trim();
+			// store it into the array
+			parts = input.split("\\s+");
 
-				// check if something was introduced
-				if (parts.length == 0 || (parts.length == 1 && parts[0].isEmpty())) {
-					valid = false;
-				}
+			// check if something was introduced
+			if (parts.length == 0 || (parts.length == 1 && parts[0].isEmpty())) {
+				valid = false;
+			}
 
-				// check each part
-				for (String part : parts) {
-					// if the movement is valid
-					if (valid) {
-						// it checks if the number is a positive number without decimals
-						if (!part.matches("\\d+")) {
-							// if its not then the movement is not valid
+			// check each part
+			for (String part : parts) {
+				// if the movement is valid
+				if (valid) {
+					// it checks if the number is a positive number without decimals
+					if (!(Integer.parseInt(part) > 0)) {
+						// if its not then the movement is not valid
+						valid = false;
+						// if it is
+					} else {
+						// we store the number in a separated variable
+						int num = Integer.parseInt(part);
+						// and we check if the number is still in the board
+						if (!player.checkTile(num)) {
+							// if its not in the board then the movement isnt valid
 							valid = false;
 							// if it is
 						} else {
-							// we store the number in a separated variable
-							int num = Integer.parseInt(part);
-							// and we check if the number is still in the board
-							if (!player.checkTile(num)) {
-								// if its not in the board then the movement isnt valid
-								valid = false;
-								// if it is
-							} else {
-								// we add the number to the variable total
-								total += num;
-								// and to the list to remove the numbers
-								toRemove.add(num);
-							}
+							// and to the list to remove the numbers
+							toRemove.add(num);
 						}
 					}
 				}
+			}
 
-				// if the move is valid and the total matches the sum
-				if (valid && total == sum) {
-					// we travel the list of the numbers to remove
-					for (int num : toRemove) {
-						// and we remove each one from the board
-						player.getTable().remove(Integer.valueOf(num));
-					}
-					System.out.println("Deleted tiles: " + toRemove);
+			// if the move is valid and if what the method returns is true
+			if (valid && Player.checkAddition(parts, sum)) {
+				// we travel the list of the numbers to remove
+				for (int num : toRemove) {
+					// and we remove each one from the board
+					player.getTable().remove(Integer.valueOf(num));
+				}
+				System.out.println("Deleted tiles: " + toRemove);
 
-					// if the board is empty
-					if (player.getTable().isEmpty()) {
-						System.out.println("Player " + playerNumber + " has played all their tiles.");
-						canMove = false;
-					}
-					// if the movement wasnt valid
-				} else {
-					System.out.println("You can't make any more moves. End of Player " + playerNumber + "'s turn.");
+				// if the board is empty
+				if (player.getTable().isEmpty()) {
+					System.out.println("Player " + playerNumber + " has played all their tiles.");
 					canMove = false;
 				}
-			} while (canMove && !player.getTable().isEmpty());
-		} catch (NumberFormatException e) {
-			System.err.println("Error: " + e.getMessage());
-		}
+				// if the movement wasnt valid
+			} else {
+				System.out.println("You can't make any more moves. End of Player " + playerNumber + "'s turn.");
+				canMove = false;
+			}
+		} while (canMove && !player.getTable().isEmpty());
+
 	}
 }
