@@ -78,8 +78,9 @@ public class Player {
 
 		addition = rand.nextInt(1, 7) + rand.nextInt(1, 7);
 	}
-	
+
 	/**
+	 * Method that we will use to compare the addition of the two numbers
 	 * 
 	 * @param dice1
 	 * @param dice2
@@ -89,6 +90,13 @@ public class Player {
 		return this.table.contains(dice1 + dice2);
 	}
 
+	/**
+	 * Method that we will use to delete the tiles from the board
+	 * 
+	 * @param num The number of the tile we will remove
+	 * @return returns true or false depending on wether the operation was succesful
+	 *         or not
+	 */
 	public boolean deleteTiles(int num) {
 		boolean valido = false;
 		if (table.contains(num)) {
@@ -116,6 +124,13 @@ public class Player {
 		return exists;
 	}
 
+	/**
+	 * Method that we will use to check if the numbers are still up
+	 * 
+	 * @param number1 The number to check
+	 * @return returns true or false depending on wether the operation was succesful
+	 *         or not
+	 */
 	public boolean checkNumbers(int number1) {
 		boolean checkedNumbers = false;
 
@@ -128,6 +143,11 @@ public class Player {
 		return checkedNumbers;
 	}
 
+	/**
+	 * Method that we will use to count the points of each player
+	 * 
+	 * @return a number that represents the points of the player
+	 */
 	public int countPoint() {
 		int cont = 0;
 
@@ -143,6 +163,13 @@ public class Player {
 		return "Player points: " + points + "\nAddition: " + addition;
 	}
 
+	/**
+	 * Method to check if the player can throw the tile
+	 * 
+	 * @param numbers      The numbers of the tiles that we will throw
+	 * @param diceAddition The addition of the 2 dices
+	 * @return true or false depending on wether you can throw the dices or not
+	 */
 	public boolean canThrow(String numbers, int diceAddition) {
 		boolean res = true;
 		int numero;
