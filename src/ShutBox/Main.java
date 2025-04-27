@@ -124,7 +124,5 @@ public class Main {
 			}
 		} while (canMove && !player.getTable().isEmpty());
 		
-		//Close the Scanner
-		read.close();
 	}
 }
