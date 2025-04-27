@@ -123,6 +123,8 @@ public class Main {
 				canMove = false;
 			}
 		} while (canMove && !player.getTable().isEmpty());
-
+		
+		//Close the Scanner
+		read.close();
 	}
 }
