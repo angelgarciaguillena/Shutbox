@@ -109,25 +109,6 @@ public class Player {
 	}
 
 	/**
-	 * <<<<<<< HEAD Method that we will use to check if the numbers are still up
-	 * 
-	 * @param number1 The number to check
-	 * @return returns true or false depending on wether the operation was succesful
-	 *         or not
-	 */
-	public boolean checkNumbers(int number1) {
-		boolean checkedNumbers = false;
-
-		boolean checkNumber1 = checkTile(number1);
-
-		if (checkNumber1) {
-			checkedNumbers = true;
-		}
-
-		return checkedNumbers;
-	}
-
-	/**
 	 * Method that we will use to count the points of each player
 	 * 
 	 * @return a number that represents the points of the player ======= Method that
